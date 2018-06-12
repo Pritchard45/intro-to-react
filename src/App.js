@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ToDo from './componets/ToDo.js';
+import ToDo from './components/ToDo.js';
 
 class App extends Component {
   render() {
@@ -14,5 +14,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
