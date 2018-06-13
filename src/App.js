@@ -13,12 +13,7 @@ class App extends Component {
       ],
       newTodoDescription: ''
     };
-  }
-
-  handleDelete(e){
-    this.setState({ deleteTodo: this.state.todos.filter(function(todo){
-        return todo !== e.target.value
-    })})
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
   handleChange(e) {
@@ -39,10 +34,11 @@ class App extends Component {
     this.setState({ todos : todos });
   }
 
-  deleteTodo(index) {
-    this.setState({
-      deleteTodo: this.state.todos.filter((_, i) => i !== index)
+  deleteTodo(id) {
+    const removeTodo = this.state.todos.filter((todo) => {
+      return todo.id === id
     });
+    this.setState({ todos: removeTodo });
     console.log('delete');
   }
 
@@ -52,7 +48,12 @@ class App extends Component {
       <div className="App">
         <ul>
           { this.state.todos.map( (todo, index) =>
-            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={ () => this.deleteTodo(index) }/>
+            <ToDo key={ index }
+            description={ todo.description }
+            isCompleted={ todo.isCompleted }
+            toggleComplete={ () => this.toggleComplete(index) }
+            deleteTodo={ () => this.deleteTodo(index) }
+            />
           )}
 
         </ul>
